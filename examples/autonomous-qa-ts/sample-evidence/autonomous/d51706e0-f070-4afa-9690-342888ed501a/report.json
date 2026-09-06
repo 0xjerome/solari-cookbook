@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "runId": "d51706e0-f070-4afa-9690-342888ed501a",
+  "mode": "solari",
+  "model": {
+    "provider": "experiential",
+    "id": "claude-fable-5"
+  },
+  "startedAt": "2026-09-06T07:48:21.038Z",
+  "target": "https://ded5bb2816c76093e550-3000.preview.getsolari.com/",
+  "termination": "agent-error",
+  "dataset": "fieldnotes-healthy-v1",
+  "limits": {
+    "maxPages": 10,
+    "maxActions": 30,
+    "maxWorkflows": 3,
+    "maxRuntimeMs": 180000,
+    "maxRetriesPerAction": 0,
+    "maxReproductionAttempts": 2,
+    "maxRequests": 200,
+    "maxModelCalls": 15,
+    "actionIntervalMs": 800
+  },
+  "counts": {
+    "actions": 2,
+    "pages": 2,
+    "requests": 2,
+    "modelCalls": 2,
+    "reproductions": 0,
+    "skipped": 0,
+    "inputTokens": 1791,
+    "outputTokens": 176
+  },
+  "workflows": [
+    "catalog-search"
+  ],
+  "findings": [],
+  "events": [
+    {
+      "at": "2026-09-06T07:48:14.454Z",
+      "type": "SETUP",
+      "message": "sandbox-create"
+    },
+    {
+      "at": "2026-09-06T07:48:15.861Z",
+      "type": "SETUP",
+      "message": "sandbox-connect"
+    },
+    {
+      "at": "2026-09-06T07:48:16.228Z",
+      "type": "SETUP",
+      "message": "fixture-upload"
+    },
+    {
+      "at": "2026-09-06T07:48:17.418Z",
+      "type": "SETUP",
+      "message": "fixture-start"
+    },
+    {
+      "at": "2026-09-06T07:48:17.755Z",
+      "type": "SETUP",
+      "message": "fixture-preview"
+    },
+    {
+      "at": "2026-09-06T07:48:19.268Z",
+      "type": "SETUP",
+      "message": "fixture-readiness"
+    },
+    {
+      "at": "2026-09-06T07:48:23.359Z",
+      "type": "SESSION",
+      "message": "Solari browser launched"
+    },
+    {
+      "at": "2026-09-06T07:48:36.092Z",
+      "type": "ACTION",
+      "message": "catalog-search: navigate"
+    },
+    {
+      "at": "2026-09-06T07:48:56.575Z",
+      "type": "WARNING",
+      "message": "Model API failed (HTTP 502); no automatic retry"
+    }
+  ],
+  "cleanupErrors": [],
+  "sessionId": "sha256:e3943e40fec8ece289942e7909b04f4ad469c8d845d2c9920686decd6d17a73d",
+  "fixtureAudit": {
+    "dangerRequests": 0
+  },
+  "finishedAt": "2026-09-06T07:49:00.777Z"
+}

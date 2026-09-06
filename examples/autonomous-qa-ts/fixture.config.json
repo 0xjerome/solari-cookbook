@@ -1,0 +1,16 @@
+{
+  "target": "http://127.0.0.1:3000/",
+  "authorized": true,
+  "safeReadPaths": [
+    "/",
+    "/catalog",
+    "/search",
+    "/about",
+    "/help",
+    "/favicon.ico"
+  ],
+  "safeControls": [
+    { "path": "/catalog", "testId": "query", "kind": "fill" },
+    { "path": "/catalog", "testId": "search", "kind": "click" }
+  ]
+}

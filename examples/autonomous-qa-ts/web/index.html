@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="qa-token" content="__CSRF__" />
+    <title>Solari QA</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/">SOLARI <span>QA</span></a
+      ><span class="eyebrow">AUTHORIZED FUNCTIONAL TESTING</span>
+    </header>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">A CAREFUL SECOND PAIR OF EYES</p>
+        <h1>Find failures.<br />Keep the evidence.</h1>
+        <p>
+          Explore an authorized web app, test safe workflows, and reproduce
+          failures in a Solari browser.
+        </p>
+      </section>
+      <div class="layout">
+        <section class="panel">
+          <h2>Start a QA run</h2>
+          <form id="run-form">
+            <label class="check"
+              ><input type="checkbox" id="demo" checked /> Use the isolated
+              synthetic demo</label
+            >
+            <label for="target">Website URL</label
+            ><input
+              id="target"
+              type="url"
+              placeholder="https://staging.example.com/"
+              disabled
+            />
+            <details id="scope">
+              <summary>Authorized scope</summary>
+              <p>
+                For your own app, declare safe read paths and test-only
+                controls. Unlisted routes and controls are skipped.
+              </p>
+              <label for="manifest">Scope configuration (JSON)</label
+              ><textarea id="manifest" rows="7">
+{"safeReadPaths":["/"],"safeControls":[]}</textarea
+              >
+            </details>
+            <label class="check authorization"
+              ><input id="authorized" type="checkbox" required /> I own this
+              application or have permission to test it.</label
+            >
+            <button id="start" type="submit">Start QA test</button>
+            <p class="note">
+              One run at a time. No purchases, messages, account changes, or
+              destructive actions.
+            </p>
+          </form>
+        </section>
+        <aside class="context">
+          <h2>A bounded run</h2>
+          <dl>
+            <div>
+              <dt>Pages</dt>
+              <dd>10</dd>
+            </div>
+            <div>
+              <dt>Actions</dt>
+              <dd>30</dd>
+            </div>
+            <div>
+              <dt>Workflows</dt>
+              <dd>3</dd>
+            </div>
+            <div>
+              <dt>QA runtime</dt>
+              <dd>3 min</dd>
+            </div>
+          </dl>
+          <p>
+            Default limits include reproduction. Model suggestions pass through
+            deterministic policy checks.
+          </p>
+          <p>
+            Confirmed means the same observable failure recurred during a safe
+            replay. Business impact still needs your judgment.
+          </p>
+        </aside>
+      </div>
+      <p id="error" class="error" role="alert" hidden></p>
+      <section id="progress" class="panel" hidden>
+        <div class="section-head">
+          <h2 id="status">Starting…</h2>
+          <button id="cancel" class="secondary">Stop run</button>
+        </div>
+        <pre id="events" role="log" aria-live="polite"></pre>
+      </section>
+      <section id="results" hidden>
+        <div class="section-head">
+          <h2>Findings & evidence</h2>
+          <a id="download">Download report JSON</a>
+        </div>
+        <p id="counts"></p>
+        <p class="note">
+          Executed actions are not the same as passed workflows.
+        </p>
+        <div id="findings"></div>
+      </section>
+    </main>
+    <footer>
+      Solari browsers and sandboxes · Model-guided exploration · Human-reviewed
+      publication
+    </footer>
+    <dialog id="draft-dialog">
+      <form id="draft-form">
+        <h2>Draft a GitHub issue</h2>
+        <label for="repository">Repository</label
+        ><input
+          id="repository"
+          placeholder="owner/repository"
+          required
+          pattern="[^/]+/[^/]+"
+        /><button type="submit">Generate draft</button>
+      </form>
+      <div id="draft-preview" hidden>
+        <p id="destination"></p>
+        <label for="draft-title">Title</label
+        ><input id="draft-title" readonly /><label for="draft-body"
+          >Exact issue body</label
+        ><textarea id="draft-body" rows="12" readonly></textarea
+        ><label class="check"
+          ><input id="approve" type="checkbox" /> I reviewed this draft and
+          approve creating this issue in the repository shown.</label
+        ><button id="publish" disabled>Create GitHub issue</button>
+        <p class="note">
+          Requires a locally configured GITHUB_TOKEN. Screenshots are not
+          uploaded automatically.
+        </p>
+      </div>
+      <p id="draft-error" class="error" role="alert"></p>
+      <p id="published"></p>
+      <button id="close-dialog" class="secondary">Close</button>
+    </dialog>
+  </body>
+</html>

@@ -3,7 +3,7 @@
 Short, runnable examples for [Solari](https://getsolari.com) — cloud browsers,
 sandboxes, and desktops behind one API key.
 
-Every example in this repo is a complete program you can run in under a minute.
+The quickstart examples are complete programs you can run in under a minute.
 They are deliberately small: one idea each, no framework, no scaffolding to read
 past. Copy one into your project and change the parts you care about.
 
@@ -32,6 +32,10 @@ past. Copy one into your project and change the parts you care about.
 | Example | Language | What it shows |
 | --- | --- | --- |
 | [desktop-computer-use-py](examples/desktop-computer-use-py) | Python | Screenshot, click, and type on a Linux GUI |
+
+## Application project
+
+[Autonomous functional QA](examples/autonomous-qa-ts) builds on the browser and sandbox examples: bounded workflow testing, safe reproduction, and screenshot evidence for authorized applications. This larger project requires a model API key for autonomous planning; a separate scripted Solari integration check needs only a Solari key.
 
 ## Running an example
 

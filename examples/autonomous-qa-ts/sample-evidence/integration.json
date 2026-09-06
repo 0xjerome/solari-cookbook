@@ -1,0 +1,47 @@
+{
+  "mode": "scripted-solari-integration",
+  "autonomous": false,
+  "startedAt": "2026-09-05T12:57:06.679Z",
+  "passed": true,
+  "stage": "network-safety",
+  "sessionId": "sha256:f9e9279d3f0cd09969a4a1eb99345e56418605af0ba7fed44a5de514fca34acd",
+  "target": "https://561e4f699ffec3ca33ef-3000.preview.getsolari.com/",
+  "safetyChecks": {
+    "redirectBlocked": true,
+    "backgroundRequestsBlocked": true,
+    "dangerEndpointRequests": 0
+  },
+  "reproductions": [
+    {
+      "matched": true,
+      "evidence": {
+        "capturedAt": "2026-09-05T12:57:39.732Z",
+        "screenshot": "evidence/repro-d30d2d0b086f-1.png",
+        "sha256": "28ca973385a2359484d2d47d4f3d83529273c8f8a73cdfc80378243cd62d1920"
+      }
+    },
+    {
+      "matched": true,
+      "evidence": {
+        "capturedAt": "2026-09-05T12:57:51.540Z",
+        "screenshot": "evidence/repro-d30d2d0b086f-2.png",
+        "sha256": "28ca973385a2359484d2d47d4f3d83529273c8f8a73cdfc80378243cd62d1920"
+      }
+    }
+  ],
+  "evidence": {
+    "capturedAt": "2026-09-05T12:57:52.364Z",
+    "screenshot": "evidence/search-failure.png",
+    "sha256": "28ca973385a2359484d2d47d4f3d83529273c8f8a73cdfc80378243cd62d1920"
+  },
+  "counts": {
+    "actions": 14,
+    "pages": 5,
+    "requests": 13,
+    "modelCalls": 0,
+    "reproductions": 2,
+    "skipped": 3
+  },
+  "cleanupUnverified": [],
+  "finishedAt": "2026-09-05T12:58:05.524Z"
+}

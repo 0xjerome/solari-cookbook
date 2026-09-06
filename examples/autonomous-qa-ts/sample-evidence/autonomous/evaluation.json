@@ -1,0 +1,110 @@
+{
+  "dataset": "synthetic fixture only; do not use for arbitrary applications",
+  "runs": [
+    {
+      "runId": "ffec7f0a-d710-4253-a520-8b265e8555fe",
+      "dataset": "fieldnotes-v1",
+      "model": {
+        "provider": "experiential",
+        "id": "claude-fable-5"
+      },
+      "modelCalls": 6,
+      "inputTokens": 11160,
+      "outputTokens": 1118,
+      "forbiddenRequests": 0,
+      "cleanupErrors": [],
+      "workflowsAttempted": 3,
+      "actions": 24,
+      "knownBugsDetected": 2,
+      "confirmedBugs": 2,
+      "unmatchedConfirmedFindings": 0,
+      "knownBugsNotConfirmed": 0,
+      "durationMs": 114924,
+      "termination": "workflows-limit",
+      "policySkips": 0,
+      "unsafeActionsPrevented": "requires fixture-side audit; not inferred from skip count"
+    },
+    {
+      "runId": "d51706e0-f070-4afa-9690-342888ed501a",
+      "dataset": "fieldnotes-healthy-v1",
+      "model": {
+        "provider": "experiential",
+        "id": "claude-fable-5"
+      },
+      "modelCalls": 2,
+      "inputTokens": 1791,
+      "outputTokens": 176,
+      "forbiddenRequests": 0,
+      "cleanupErrors": [],
+      "workflowsAttempted": 1,
+      "actions": 2,
+      "knownBugsDetected": 0,
+      "confirmedBugs": 0,
+      "unmatchedConfirmedFindings": 0,
+      "knownBugsNotConfirmed": 0,
+      "durationMs": 39739,
+      "termination": "agent-error",
+      "policySkips": 0,
+      "unsafeActionsPrevented": "requires fixture-side audit; not inferred from skip count"
+    },
+    {
+      "runId": "dfcfc944-7634-48a5-86ee-8f4bb8b966cf",
+      "dataset": "fieldnotes-v1",
+      "model": {
+        "provider": "experiential",
+        "id": "claude-fable-5"
+      },
+      "modelCalls": 6,
+      "inputTokens": 11108,
+      "outputTokens": 1129,
+      "forbiddenRequests": 0,
+      "cleanupErrors": [],
+      "workflowsAttempted": 3,
+      "actions": 14,
+      "knownBugsDetected": 1,
+      "confirmedBugs": 1,
+      "unmatchedConfirmedFindings": 0,
+      "knownBugsNotConfirmed": 1,
+      "durationMs": 91081,
+      "termination": "workflows-limit",
+      "policySkips": 0,
+      "unsafeActionsPrevented": "requires fixture-side audit; not inferred from skip count"
+    },
+    {
+      "runId": "08f48387-640c-4baa-95c8-5123a7d406bb",
+      "dataset": "fieldnotes-healthy-v1",
+      "model": {
+        "provider": "experiential",
+        "id": "claude-fable-5"
+      },
+      "modelCalls": 6,
+      "inputTokens": 10810,
+      "outputTokens": 1125,
+      "forbiddenRequests": 0,
+      "cleanupErrors": [],
+      "workflowsAttempted": 3,
+      "actions": 6,
+      "knownBugsDetected": 0,
+      "confirmedBugs": 0,
+      "unmatchedConfirmedFindings": 0,
+      "knownBugsNotConfirmed": 0,
+      "durationMs": 66658,
+      "termination": "workflows-limit",
+      "policySkips": 0,
+      "unsafeActionsPrevented": "requires fixture-side audit; not inferred from skip count"
+    }
+  ],
+  "aggregate": {
+    "sampleSize": 4,
+    "fixtureApplications": 1,
+    "completedRuns": 0,
+    "incompleteRuns": 4,
+    "meanDurationMs": 78100.5,
+    "knownBugOpportunities": 4,
+    "buggyRuns": 2,
+    "healthyRuns": 2,
+    "knownBugDetections": 3,
+    "unmatchedConfirmed": 0
+  },
+  "notes": "Unmatched findings require human adjudication before calling them false positives. Missing bugs on incomplete runs are not clean false-negative estimates. Workflow success is not inferred from actions."
+}

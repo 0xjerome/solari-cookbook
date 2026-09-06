@@ -2,4 +2,4 @@
 runs/
 .env*
 !.env.example
-evaluation.json
+/evaluation.json

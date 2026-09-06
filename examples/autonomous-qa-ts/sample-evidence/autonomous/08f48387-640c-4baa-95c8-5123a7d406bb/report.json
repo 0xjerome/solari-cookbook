@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "runId": "08f48387-640c-4baa-95c8-5123a7d406bb",
+  "mode": "solari",
+  "model": {
+    "provider": "experiential",
+    "id": "claude-fable-5"
+  },
+  "startedAt": "2026-09-06T07:51:37.723Z",
+  "target": "https://138a531dbd85071d91b2-3000.preview.getsolari.com/",
+  "termination": "workflows-limit",
+  "dataset": "fieldnotes-healthy-v1",
+  "limits": {
+    "maxPages": 10,
+    "maxActions": 30,
+    "maxWorkflows": 3,
+    "maxRuntimeMs": 180000,
+    "maxRetriesPerAction": 0,
+    "maxReproductionAttempts": 2,
+    "maxRequests": 200,
+    "maxModelCalls": 15,
+    "actionIntervalMs": 800
+  },
+  "counts": {
+    "actions": 6,
+    "pages": 5,
+    "requests": 5,
+    "modelCalls": 6,
+    "reproductions": 0,
+    "skipped": 0,
+    "inputTokens": 10810,
+    "outputTokens": 1125
+  },
+  "workflows": [
+    "catalog-search",
+    "about-page",
+    "help-page"
+  ],
+  "findings": [],
+  "events": [
+    {
+      "at": "2026-09-06T07:51:31.127Z",
+      "type": "SETUP",
+      "message": "sandbox-create"
+    },
+    {
+      "at": "2026-09-06T07:51:32.547Z",
+      "type": "SETUP",
+      "message": "sandbox-connect"
+    },
+    {
+      "at": "2026-09-06T07:51:33.114Z",
+      "type": "SETUP",
+      "message": "fixture-upload"
+    },
+    {
+      "at": "2026-09-06T07:51:33.871Z",
+      "type": "SETUP",
+      "message": "fixture-start"
+    },
+    {
+      "at": "2026-09-06T07:51:34.215Z",
+      "type": "SETUP",
+      "message": "fixture-preview"
+    },
+    {
+      "at": "2026-09-06T07:51:35.743Z",
+      "type": "SETUP",
+      "message": "fixture-readiness"
+    },
+    {
+      "at": "2026-09-06T07:51:40.256Z",
+      "type": "SESSION",
+      "message": "Solari browser launched"
+    },
+    {
+      "at": "2026-09-06T07:51:54.079Z",
+      "type": "ACTION",
+      "message": "catalog-search: navigate"
+    },
+    {
+      "at": "2026-09-06T07:52:01.272Z",
+      "type": "ACTION",
+      "message": "catalog-search: fill"
+    },
+    {
+      "at": "2026-09-06T07:52:12.658Z",
+      "type": "ACTION",
+      "message": "catalog-search: click"
+    },
+    {
+      "at": "2026-09-06T07:52:23.035Z",
+      "type": "ACTION",
+      "message": "about-page: navigate"
+    },
+    {
+      "at": "2026-09-06T07:52:30.906Z",
+      "type": "ACTION",
+      "message": "help-page: navigate"
+    },
+    {
+      "at": "2026-09-06T07:52:40.746Z",
+      "type": "WARNING",
+      "message": "workflows-limit"
+    }
+  ],
+  "cleanupErrors": [],
+  "sessionId": "sha256:4c006240806ee376c7b7070bc7334777905b3b5b066829f29104a55184385695",
+  "fixtureAudit": {
+    "dangerRequests": 0
+  },
+  "finishedAt": "2026-09-06T07:52:44.381Z"
+}

@@ -133,7 +133,9 @@ export type Report = {
   runId: string;
   sessionId?: string;
   mode: "solari";
-  dataset?: "fieldnotes-v1";
+  model?: { provider: string; id: string };
+  dataset?: "fieldnotes-v1" | "fieldnotes-healthy-v1";
+  fixtureAudit?: { dangerRequests: number };
   startedAt: string;
   finishedAt?: string;
   target: string;

@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "evaluate": "tsx src/evaluate.ts",
     "test:solari": "QA_SOLARI_TESTS=1 tsx --test test/solari.integration.test.ts",
-    "test:browser": "QA_BROWSER_TESTS=1 tsx --test test/browser.integration.test.ts"
+    "test:browser": "QA_BROWSER_TESTS=1 tsx --test test/browser.integration.test.ts",
+    "ui": "tsx src/server.ts"
   },
   "dependencies": {
     "@solarisdk/browser": "0.1.3",

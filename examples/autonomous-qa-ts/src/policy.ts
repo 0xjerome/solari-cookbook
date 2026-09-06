@@ -165,7 +165,7 @@ export function redact(text: string, secrets: string[] = []): string {
   for (const s of secrets.filter(Boolean).sort((a, b) => b.length - a.length))
     value = value.split(s).join("[REDACTED]");
   return value
-    .replace(/\b(?:sk-|slr_)[A-Za-z0-9_-]+/g, "[REDACTED]")
+    .replace(/\b(?:sk-|slr_|xpl_)[A-Za-z0-9_-]+/g, "[REDACTED]")
     .replace(/\bBearer\s+[^\s"'<>]+/gi, "Bearer [REDACTED]")
     .replace(
       /([?&](?:token|key|secret|password|auth|session)[^=\s]*=)[^&\s"<>]+/gi,

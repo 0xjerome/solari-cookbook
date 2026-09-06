@@ -1,3 +1,4 @@
+import { modelBase, UserError, type Provider } from "./settings.js";
 import { z } from "zod";
 import { decisionSchema, type Decision, type Observation } from "./schema.js";
 import { Budget, bounded } from "./policy.js";
@@ -18,6 +19,7 @@ export class ModelPlanner implements Planner {
     private key: string,
     private model: string,
     private budget: Budget,
+    private provider: Provider = "anthropic",
   ) {}
   async decide(
     observation: Observation,
@@ -42,7 +44,7 @@ export class ModelPlanner implements Planner {
       AbortSignal.timeout(30_000),
     ]);
     const response = await bounded(
-      fetch("https://api.anthropic.com/v1/messages", {
+      fetch(modelBase(this.provider) + "/v1/messages", {
         method: "POST",
         signal,
         headers: {
@@ -73,12 +75,21 @@ export class ModelPlanner implements Planner {
       signal,
     );
     if (!response.ok)
-      throw new Error(
+      throw new UserError(
         `Model API failed (HTTP ${response.status}); no automatic retry`,
       );
     const result = (await response.json()) as {
+      usage?: { input_tokens?: number; output_tokens?: number };
       content?: { type: string; name?: string; input?: unknown }[];
     };
+    for (const [field, key] of [
+      ["input_tokens", "inputTokens"],
+      ["output_tokens", "outputTokens"],
+    ] as const) {
+      const value = result.usage?.[field];
+      if (typeof value === "number" && Number.isFinite(value) && value >= 0)
+        this.budget.counts[key] = (this.budget.counts[key] || 0) + value;
+    }
     const calls = result.content?.filter(
       (c) => c.type === "tool_use" && c.name === "qa_decision",
     );

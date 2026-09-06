@@ -78,3 +78,38 @@ test("invalid model output fails closed", async () => {
     b.dispose();
   }
 });
+
+test("Experiential planner routes tool requests and accounts returned usage", async () => {
+  const original = globalThis.fetch;
+  const b = new Budget(config.limits);
+  try {
+    globalThis.fetch = async (url, init) => {
+      assert.equal(url, "https://api.experientiallabs.ai/v1/messages");
+      assert.equal(new Headers(init?.headers).get("x-api-key"), "unit-key");
+      return Response.json({
+        usage: { input_tokens: 10, output_tokens: 5 },
+        content: [
+          {
+            type: "tool_use",
+            name: "qa_decision",
+            input: {
+              workflow: "done",
+              rationale: "",
+              expected: "",
+              action: { kind: "finish" },
+            },
+          },
+        ],
+      });
+    };
+    await new ModelPlanner("unit-key", "unit-model", b, "experiential").decide(
+      { url: config.target, title: "", text: "", controls: [] },
+      [],
+    );
+    assert.equal(b.counts.inputTokens, 10);
+    assert.equal(b.counts.outputTokens, 5);
+  } finally {
+    globalThis.fetch = original;
+    b.dispose();
+  }
+});

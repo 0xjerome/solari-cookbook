@@ -1,0 +1,286 @@
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #20332b;
+  background: #f6f7f2;
+  line-height: 1.55;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+header {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 28px;
+  border-bottom: 1px solid #dce2d7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand {
+  font-size: 20px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: inherit;
+}
+.brand span {
+  font-weight: 400;
+  color: #667267;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  font-weight: 650;
+  color: #526959;
+}
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 44px 28px;
+}
+.intro {
+  max-width: 660px;
+  margin-bottom: 34px;
+}
+.intro h1 {
+  font-size: clamp(34px, 5vw, 52px);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin: 14px 0 20px;
+  font-weight: 650;
+}
+.intro > p:last-child {
+  max-width: 560px;
+  color: #5a685f;
+  font-size: 17px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+.panel {
+  background: #fff;
+  border: 1px solid #dce2d7;
+  border-radius: 10px;
+  padding: 28px;
+}
+h2 {
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+}
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 550;
+  margin: 18px 0 7px;
+}
+input:not([type="checkbox"]),
+textarea {
+  font: inherit;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bdc8be;
+  border-radius: 5px;
+  background: #fff;
+  color: inherit;
+}
+input:disabled {
+  background: #f3f5f0;
+}
+textarea {
+  font:
+    13px ui-monospace,
+    monospace;
+  line-height: 1.5;
+  resize: vertical;
+}
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-weight: 400;
+}
+.check input {
+  margin: 5px 0 0;
+  accent-color: #285d45;
+}
+.authorization {
+  margin: 22px 0;
+}
+button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 20px;
+  border: 1px solid #285d45;
+  border-radius: 5px;
+  background: #285d45;
+  color: white;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+button.secondary {
+  background: transparent;
+  border-color: #bdc8be;
+  color: #285d45;
+  padding: 8px 14px;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #a7c9b5;
+  outline-offset: 3px;
+}
+.note {
+  font-size: 12px;
+  color: #647269;
+}
+details {
+  margin-top: 20px;
+}
+summary {
+  font-size: 14px;
+  cursor: pointer;
+}
+details p {
+  font-size: 13px;
+  color: #647269;
+}
+.context {
+  padding: 22px 0;
+}
+.context p {
+  font-size: 13px;
+  color: #647269;
+  max-width: 300px;
+}
+dl {
+  margin-bottom: 26px;
+}
+dl div {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #dce2d7;
+  padding: 10px 0;
+}
+dt {
+  color: #647269;
+  font-size: 14px;
+}
+dd {
+  font-weight: 600;
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.section-head h2 {
+  margin: 0;
+}
+#progress,
+#results {
+  margin-top: 30px;
+}
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font:
+    12px ui-monospace,
+    monospace;
+  line-height: 1.8;
+  max-height: 290px;
+  overflow: auto;
+  margin-bottom: 0;
+}
+.error {
+  color: #923e32;
+  background: #fff3ee;
+  padding: 10px;
+  border-radius: 4px;
+}
+.finding {
+  border-top: 1px solid #dce2d7;
+  padding: 24px 0;
+}
+.finding h3 {
+  font-size: 18px;
+}
+.finding p {
+  font-size: 14px;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.finding img {
+  display: block;
+  max-width: 100%;
+  border: 1px solid #dce2d7;
+  border-radius: 5px;
+  margin: 15px 0;
+}
+a {
+  color: #285d45;
+}
+footer {
+  max-width: 1000px;
+  padding: 24px 28px;
+  margin: auto;
+  color: #647269;
+  font-size: 12px;
+}
+dialog {
+  border: 1px solid #bdc8be;
+  border-radius: 10px;
+  max-width: 680px;
+  width: calc(100% - 40px);
+  padding: 28px;
+  color: inherit;
+}
+dialog::backdrop {
+  background: #20332b88;
+}
+[hidden] {
+  display: none !important;
+}
+@media (max-width: 700px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  header .eyebrow {
+    display: none;
+  }
+  .panel {
+    padding: 22px;
+  }
+  .context {
+    padding: 15px;
+  }
+  .context p {
+    max-width: none;
+  }
+  .section-head {
+    flex-wrap: wrap;
+  }
+}

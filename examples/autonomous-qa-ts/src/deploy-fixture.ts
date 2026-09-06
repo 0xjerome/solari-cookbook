@@ -7,9 +7,14 @@ import { bounded, parseConfig } from "./policy.js";
 export async function deployFixture(
   apiKey: string,
   onProgress: (stage: string) => void = () => {},
+  abort?: AbortSignal,
+  healthy = false,
 ) {
   const client = new SolariClient({ apiKey });
-  const signal = AbortSignal.timeout(60000);
+  const signal = AbortSignal.any([
+    AbortSignal.timeout(60000),
+    ...(abort ? [abort] : []),
+  ]);
   onProgress("sandbox-create");
   const creation = client.sandboxes.create({
     template: "base",
@@ -23,7 +28,7 @@ export async function deployFixture(
   const sandbox = await bounded(creation, signal);
   try {
     // Capture the same fixture responses used by local integration tests.
-    const { server } = fixtureServer();
+    const { server } = fixtureServer(healthy);
     await new Promise<void>((resolve) =>
       server.listen(0, "127.0.0.1", resolve),
     );

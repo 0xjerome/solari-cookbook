@@ -1,3 +1,4 @@
+import { UserError } from "./settings.js";
 import {
   decisionSchema,
   type Report,
@@ -226,7 +227,10 @@ export async function runEngine(
       : error instanceof Stop
         ? error.message
         : "agent-error";
-    log("WARNING", report.termination);
+    log(
+      "WARNING",
+      error instanceof UserError ? error.message : report.termination,
+    );
   } finally {
     for (const f of report.findings)
       if (

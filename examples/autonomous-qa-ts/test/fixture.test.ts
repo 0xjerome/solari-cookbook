@@ -25,3 +25,20 @@ test("fixture serves healthy journeys and the two declared failures", async () =
     await new Promise<void>((resolve) => server.close(() => resolve()));
   }
 });
+
+test("healthy fixture variant removes the seeded HTTP failures", async () => {
+  const { server } = fixtureServer(true);
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const address = server.address();
+  assert.ok(address && typeof address !== "string");
+  try {
+    for (const path of ["/search?q=qa-test", "/help"])
+      assert.equal(
+        (await fetch(`http://127.0.0.1:${address.port}${path}`)).status,
+        200,
+      );
+  } finally {
+    server.closeAllConnections();
+    await new Promise<void>((resolve) => server.close(() => resolve()));
+  }
+});

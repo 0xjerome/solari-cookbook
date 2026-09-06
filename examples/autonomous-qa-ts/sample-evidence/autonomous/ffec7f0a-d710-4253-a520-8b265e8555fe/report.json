@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "runId": "ffec7f0a-d710-4253-a520-8b265e8555fe",
+  "mode": "solari",
+  "model": {
+    "provider": "experiential",
+    "id": "claude-fable-5"
+  },
+  "startedAt": "2026-09-06T07:45:26.404Z",
+  "target": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/",
+  "termination": "workflows-limit",
+  "dataset": "fieldnotes-v1",
+  "limits": {
+    "maxPages": 10,
+    "maxActions": 30,
+    "maxWorkflows": 3,
+    "maxRuntimeMs": 180000,
+    "maxRetriesPerAction": 0,
+    "maxReproductionAttempts": 2,
+    "maxRequests": 200,
+    "maxModelCalls": 15,
+    "actionIntervalMs": 800
+  },
+  "counts": {
+    "actions": 24,
+    "pages": 5,
+    "requests": 19,
+    "modelCalls": 6,
+    "reproductions": 4,
+    "skipped": 0,
+    "inputTokens": 11160,
+    "outputTokens": 1118
+  },
+  "workflows": [
+    "catalog-search",
+    "help-page",
+    "about-page"
+  ],
+  "findings": [
+    {
+      "id": "BUG-001",
+      "status": "CONFIRMED",
+      "title": "HTTP 500 at /search",
+      "severity": "medium",
+      "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/search?q=qa-test",
+      "signal": {
+        "kind": "http-error",
+        "fingerprint": "d30d2d0b086fa8170fbcd4623036c06d8d690330a79061e7637cdf915f895f66",
+        "detail": "HTTP 500 at /search"
+      },
+      "expected": "Clicking Search submits the query and the page shows search results (or an empty-results message) for the synthetic term without errors.",
+      "actual": "HTTP 500 at /search",
+      "steps": [
+        {
+          "kind": "navigate",
+          "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/",
+          "href": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/",
+          "expected": "Application loads without a server error"
+        },
+        {
+          "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/",
+          "kind": "navigate",
+          "href": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/catalog",
+          "expected": "Catalog search page loads showing a search input and a search/submit control."
+        },
+        {
+          "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/catalog",
+          "kind": "fill",
+          "testId": "query",
+          "value": "qa-test",
+          "expected": "The Search term input (c4) accepts and displays the text \"qa-test\"."
+        },
+        {
+          "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/catalog",
+          "kind": "click",
+          "testId": "search",
+          "expected": "Clicking Search submits the query and the page shows search results (or an empty-results message) for the synthetic term without errors."
+        }
+      ],
+      "reproductions": [
+        {
+          "matched": true,
+          "evidence": {
+            "capturedAt": "2026-09-06T07:46:13.336Z",
+            "screenshot": "evidence/repro-d30d2d0b086f-1.png",
+            "sha256": "0d220e22fd75d128329c90e2cb0e1f26b8271b4951bf0c9fd452d732f816ab44"
+          }
+        },
+        {
+          "matched": true,
+          "evidence": {
+            "capturedAt": "2026-09-06T07:46:24.399Z",
+            "screenshot": "evidence/repro-d30d2d0b086f-2.png",
+            "sha256": "0d220e22fd75d128329c90e2cb0e1f26b8271b4951bf0c9fd452d732f816ab44"
+          }
+        }
+      ],
+      "evidence": {
+        "capturedAt": "2026-09-06T07:45:59.897Z",
+        "screenshot": "evidence/observed-d30d2d0b086f.png",
+        "sha256": "0d220e22fd75d128329c90e2cb0e1f26b8271b4951bf0c9fd452d732f816ab44"
+      },
+      "confirmationRule": "Same HTTP/runtime failure after independent safe replay, without policy blocks. Blank-page heuristics remain potential."
+    },
+    {
+      "id": "BUG-002",
+      "status": "CONFIRMED",
+      "title": "HTTP 404 at /help",
+      "severity": "medium",
+      "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/help",
+      "signal": {
+        "kind": "http-error",
+        "fingerprint": "aef976071de69a3621a41f01c601df824d6776a514503da21d0cf1efbfaf1adc",
+        "detail": "HTTP 404 at /help"
+      },
+      "expected": "Help page loads with informational content and navigation controls remain available.",
+      "actual": "HTTP 404 at /help",
+      "steps": [
+        {
+          "kind": "navigate",
+          "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/",
+          "href": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/",
+          "expected": "Application loads without a server error"
+        },
+        {
+          "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/",
+          "kind": "navigate",
+          "href": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/catalog",
+          "expected": "Catalog search page loads showing a search input and a search/submit control."
+        },
+        {
+          "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/catalog",
+          "kind": "fill",
+          "testId": "query",
+          "value": "qa-test",
+          "expected": "The Search term input (c4) accepts and displays the text \"qa-test\"."
+        },
+        {
+          "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/catalog",
+          "kind": "click",
+          "testId": "search",
+          "expected": "Clicking Search submits the query and the page shows search results (or an empty-results message) for the synthetic term without errors."
+        },
+        {
+          "url": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/search?q=qa-test",
+          "kind": "navigate",
+          "href": "https://1d79f4dbd565f1d001bc-3000.preview.getsolari.com/help",
+          "expected": "Help page loads with informational content and navigation controls remain available."
+        }
+      ],
+      "reproductions": [
+        {
+          "matched": true,
+          "evidence": {
+            "capturedAt": "2026-09-06T07:46:49.029Z",
+            "screenshot": "evidence/repro-aef976071de6-1.png",
+            "sha256": "c16a83e90bac8e2826539390e56b7c91b8340f0ff245e214b99ed746a1350b54"
+          }
+        },
+        {
+          "matched": true,
+          "evidence": {
+            "capturedAt": "2026-09-06T07:47:01.171Z",
+            "screenshot": "evidence/repro-aef976071de6-2.png",
+            "sha256": "c16a83e90bac8e2826539390e56b7c91b8340f0ff245e214b99ed746a1350b54"
+          }
+        }
+      ],
+      "evidence": {
+        "capturedAt": "2026-09-06T07:46:34.780Z",
+        "screenshot": "evidence/observed-aef976071de6.png",
+        "sha256": "c16a83e90bac8e2826539390e56b7c91b8340f0ff245e214b99ed746a1350b54"
+      },
+      "confirmationRule": "Same HTTP/runtime failure after independent safe replay, without policy blocks. Blank-page heuristics remain potential."
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-09-06T07:45:19.567Z",
+      "type": "SETUP",
+      "message": "sandbox-create"
+    },
+    {
+      "at": "2026-09-06T07:45:21.888Z",
+      "type": "SETUP",
+      "message": "sandbox-connect"
+    },
+    {
+      "at": "2026-09-06T07:45:22.271Z",
+      "type": "SETUP",
+      "message": "fixture-upload"
+    },
+    {
+      "at": "2026-09-06T07:45:23.029Z",
+      "type": "SETUP",
+      "message": "fixture-start"
+    },
+    {
+      "at": "2026-09-06T07:45:23.432Z",
+      "type": "SETUP",
+      "message": "fixture-preview"
+    },
+    {
+      "at": "2026-09-06T07:45:24.869Z",
+      "type": "SETUP",
+      "message": "fixture-readiness"
+    },
+    {
+      "at": "2026-09-06T07:45:28.770Z",
+      "type": "SESSION",
+      "message": "Solari browser launched"
+    },
+    {
+      "at": "2026-09-06T07:45:43.305Z",
+      "type": "ACTION",
+      "message": "catalog-search: navigate"
+    },
+    {
+      "at": "2026-09-06T07:45:50.713Z",
+      "type": "ACTION",
+      "message": "catalog-search: fill"
+    },
+    {
+      "at": "2026-09-06T07:45:58.975Z",
+      "type": "ACTION",
+      "message": "catalog-search: click"
+    },
+    {
+      "at": "2026-09-06T07:46:00.814Z",
+      "type": "POTENTIAL",
+      "message": "HTTP 500 at /search"
+    },
+    {
+      "at": "2026-09-06T07:46:25.365Z",
+      "type": "CONFIRMED",
+      "message": "BUG-001: 2/2 replays matched"
+    },
+    {
+      "at": "2026-09-06T07:46:34.027Z",
+      "type": "ACTION",
+      "message": "help-page: navigate"
+    },
+    {
+      "at": "2026-09-06T07:46:35.879Z",
+      "type": "POTENTIAL",
+      "message": "HTTP 404 at /help"
+    },
+    {
+      "at": "2026-09-06T07:47:02.047Z",
+      "type": "CONFIRMED",
+      "message": "BUG-002: 2/2 replays matched"
+    },
+    {
+      "at": "2026-09-06T07:47:11.671Z",
+      "type": "ACTION",
+      "message": "about-page: navigate"
+    },
+    {
+      "at": "2026-09-06T07:47:17.813Z",
+      "type": "WARNING",
+      "message": "workflows-limit"
+    }
+  ],
+  "cleanupErrors": [],
+  "sessionId": "sha256:689c2c1ceff61eb347b4ed7a6c709e05e26570ca2077f9b31c87f5f15a3c3cd4",
+  "fixtureAudit": {
+    "dangerRequests": 0
+  },
+  "finishedAt": "2026-09-06T07:47:21.328Z"
+}

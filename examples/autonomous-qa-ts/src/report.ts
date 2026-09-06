@@ -9,16 +9,19 @@ export function escapeMarkdown(value: string) {
     .replace(/>/g, "&gt;")
     .replace(/[\\`*_{}\[\]#!|]/g, "\\$&");
 }
+export function sanitizeReport(report: Report, secrets: string[] = []): Report {
+  return JSON.parse(
+    JSON.stringify(report, (_key, value) =>
+      typeof value === "string" ? redact(value, secrets) : value,
+    ),
+  ) as Report;
+}
 export async function saveReport(
   report: Report,
   dir: string,
   secrets: string[] = [],
 ) {
-  const safe = JSON.parse(
-    JSON.stringify(report, (_key, value) =>
-      typeof value === "string" ? redact(value, secrets) : value,
-    ),
-  ) as Report;
+  const safe = sanitizeReport(report, secrets);
   await writeFile(
     join(dir, "report.json"),
     JSON.stringify(safe, null, 2) + "\n",

@@ -22,7 +22,7 @@ export const groundTruth = [
 ];
 const layout = (title: string, body: string) =>
   `<!doctype html><html><head><meta charset="utf-8"><title>${title}</title><style>body{font:18px system-ui;max-width:760px;margin:60px auto;padding:20px;line-height:1.6}nav{display:flex;gap:20px}input,button{font:inherit;padding:8px}aside{margin-top:50px;font-size:14px;color:#555}</style></head><body><nav><a href="/">Home</a><a href="/catalog">Catalog search</a><a href="/about">About</a><a href="/help">Help</a></nav><h1>${title}</h1>${body}<aside>Isolated synthetic QA fixture. No real accounts or external services.</aside></body></html>`;
-export function fixtureServer() {
+export function fixtureServer(healthy = false) {
   const counters = { requests: 0, danger: 0 };
   const server = createServer((req, res) => {
     counters.requests++;
@@ -57,11 +57,13 @@ export function fixtureServer() {
         );
         break;
       case "/search":
-        res.writeHead(500);
+        res.writeHead(healthy ? 200 : 500);
         res.end(
           layout(
-            "Search unavailable",
-            "<p>The search service failed unexpectedly. Please try again.</p>",
+            healthy ? "Search results" : "Search unavailable",
+            healthy
+              ? "<p>Found one synthetic item: Test Notebook.</p>"
+              : "<p>The search service failed unexpectedly. Please try again.</p>",
           ),
         );
         break;
@@ -74,11 +76,13 @@ export function fixtureServer() {
         );
         break;
       case "/help":
-        res.writeHead(404);
+        res.writeHead(healthy ? 200 : 404);
         res.end(
           layout(
-            "Help unavailable",
-            "<p>The requested help page could not be found.</p>",
+            healthy ? "Help" : "Help unavailable",
+            healthy
+              ? "<p>Search the catalog by entering a term and pressing Search.</p>"
+              : "<p>The requested help page could not be found.</p>",
           ),
         );
         break;

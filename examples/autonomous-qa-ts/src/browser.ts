@@ -260,7 +260,7 @@ export class BrowserDriver implements Driver {
       );
       if (
         this.secrets.filter(Boolean).some((s) => text.includes(s)) ||
-        /\b(?:sk-|slr_)[A-Za-z0-9_-]+|Bearer\s+\S+/.test(text)
+        /\b(?:sk-|slr_|xpl_)[A-Za-z0-9_-]+|Bearer\s+\S+/.test(text)
       )
         return {
           capturedAt,

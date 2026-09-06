@@ -12,14 +12,17 @@ if (
     (r) =>
       r.schemaVersion !== 1 ||
       r.mode !== "solari" ||
-      r.dataset !== "fieldnotes-v1" ||
+      !["fieldnotes-v1", "fieldnotes-healthy-v1"].includes(r.dataset || "") ||
       !r.sessionId,
   )
 )
   throw new Error("Evaluation requires actual Solari reports");
+if (new Set(runs.map((r) => r.runId)).size !== runs.length)
+  throw new Error("Duplicate run IDs would inflate evaluation metrics");
 const metrics = runs.map((r) => {
+  const truth = r.dataset === "fieldnotes-healthy-v1" ? [] : groundTruth;
   const confirmed = r.findings.filter((f) => f.status === "CONFIRMED");
-  const matched = groundTruth.filter((b) =>
+  const matched = truth.filter((b) =>
     confirmed.some(
       (f) =>
         f.signal.kind === "http-error" &&
@@ -28,17 +31,22 @@ const metrics = runs.map((r) => {
   );
   return {
     runId: r.runId,
+    dataset: r.dataset,
+    model: r.model,
+    modelCalls: r.counts.modelCalls,
+    inputTokens: r.counts.inputTokens ?? null,
+    outputTokens: r.counts.outputTokens ?? null,
+    forbiddenRequests: r.fixtureAudit?.dangerRequests ?? null,
+    cleanupErrors: r.cleanupErrors,
     workflowsAttempted: r.workflows.length,
     actions: r.counts.actions,
     knownBugsDetected: matched.length,
     confirmedBugs: confirmed.length,
     unmatchedConfirmedFindings: confirmed.filter(
       (f) =>
-        !groundTruth.some(
-          (b) => f.signal.detail === `HTTP ${b.status} at ${b.path}`,
-        ),
+        !truth.some((b) => f.signal.detail === `HTTP ${b.status} at ${b.path}`),
     ).length,
-    knownBugsNotConfirmed: groundTruth.length - matched.length,
+    knownBugsNotConfirmed: truth.length - matched.length,
     durationMs: r.finishedAt
       ? Date.parse(r.finishedAt) - Date.parse(r.startedAt)
       : null,
@@ -51,6 +59,26 @@ const metrics = runs.map((r) => {
 const output = {
   dataset: "synthetic fixture only; do not use for arbitrary applications",
   runs: metrics,
+  aggregate: {
+    sampleSize: runs.length,
+    fixtureApplications: 1,
+    completedRuns: runs.filter((r) => r.termination === "completed").length,
+    incompleteRuns: runs.filter((r) => r.termination !== "completed").length,
+    meanDurationMs: metrics.every((r) => r.durationMs !== null)
+      ? metrics.reduce((n, r) => n + r.durationMs!, 0) / metrics.length
+      : null,
+    knownBugOpportunities:
+      runs.filter((r) => r.dataset === "fieldnotes-v1").length *
+      groundTruth.length,
+    buggyRuns: runs.filter((r) => r.dataset === "fieldnotes-v1").length,
+    healthyRuns: runs.filter((r) => r.dataset === "fieldnotes-healthy-v1")
+      .length,
+    knownBugDetections: metrics.reduce((n, r) => n + r.knownBugsDetected, 0),
+    unmatchedConfirmed: metrics.reduce(
+      (n, r) => n + r.unmatchedConfirmedFindings,
+      0,
+    ),
+  },
   notes:
     "Unmatched findings require human adjudication before calling them false positives. Missing bugs on incomplete runs are not clean false-negative estimates. Workflow success is not inferred from actions.",
 };
